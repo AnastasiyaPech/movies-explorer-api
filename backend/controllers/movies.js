@@ -63,8 +63,8 @@ const findMovie = (req, res, next) => {
 
 // /_id
 const deleteMovieId = (req, res, next) => {
-  const { movieId } = req.params;
-  Movie.findById(movieId)
+  const { _id } = req.params;
+  Movie.findById(_id)
     // .populate(['owner', 'likes'])
     .orFail(new Error('NoValidId'))
     .then((movie) => {
@@ -72,7 +72,7 @@ const deleteMovieId = (req, res, next) => {
         next(new ForbiddenError('Bad request'));
         return;
       }
-      Movie.findByIdAndRemove(movieId)
+      Movie.findByIdAndRemove(_id)
         .then(() => {
           res.status(200).send({ message: 'Movie removed' });
         });
