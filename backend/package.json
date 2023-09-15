@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/AnastasiyaPech/movies-explorer-api#readme",
   "devDependencies": {
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
@@ -29,9 +32,6 @@
     "celebrate": "^15.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "eslint": "^8.49.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.1",
     "express": "^4.18.2",
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^9.0.2",

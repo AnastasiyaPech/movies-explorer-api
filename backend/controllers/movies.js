@@ -49,8 +49,7 @@ const createMovie = (req, res, next) => {
 
 // get /
 const findMovie = (req, res, next) => {
-  Movie.find({})
-    // .populate(['owner', 'likes'])
+  Movie.find({ owner: req.user._id })
     .then((movies) => res.status(200).send(movies))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -65,7 +64,6 @@ const findMovie = (req, res, next) => {
 const deleteMovieId = (req, res, next) => {
   const { _id } = req.params;
   Movie.findById(_id)
-    // .populate(['owner', 'likes'])
     .orFail(new Error('NoValidId'))
     .then((movie) => {
       if (movie.owner.toString() !== req.user._id) {
@@ -80,7 +78,8 @@ const deleteMovieId = (req, res, next) => {
     .catch((err) => {
       if (err.message === 'NoValidId') {
         next(new NotFoundError('Movie not found'));
-      } else if (err.name === 'ValidationError' || err.name === 'CastError') {
+        return;
+      } if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new ValidationError('Bad request'));
         return;
       }
